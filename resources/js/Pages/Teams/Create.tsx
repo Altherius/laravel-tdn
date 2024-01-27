@@ -4,13 +4,15 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import Layout from "@/Layouts/Layout";
+import {FormEvent} from "react";
+import {PageProps} from "@/types";
 
-export default function Create({ auth }) {
+export default function Create({ auth }: PageProps) {
     const { data, setData, post, processing, reset, errors } = useForm({
         name: '',
     })
 
-    const submit = (e) => {
+    const submit = (e: FormEvent) => {
         e.preventDefault();
         post(route('teams.store'));
     };

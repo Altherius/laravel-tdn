@@ -26,6 +26,9 @@ export default function Guest({header, children }: PropsWithChildren<{header?: R
                                 <NavLink href={route('teams.index')} active={route().current('teams.index')}>
                                     Classement
                                 </NavLink>
+                                <NavLink href={route('matches.index')} active={route().current('matches.index')}>
+                                    Matches
+                                </NavLink>
                             </div>
                         </div>
 
@@ -68,8 +71,11 @@ export default function Guest({header, children }: PropsWithChildren<{header?: R
                         <ResponsiveNavLink href={route('teams.index')} active={route().current('teams.index')}>
                             Classement
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('matches.index')} active={route().current('matches.index')}>
+                            Matches
+                        </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('login')} active={route().current('login')}>
-                            Classement
+                            Connexion
                         </ResponsiveNavLink>
                     </div>
                 </div>

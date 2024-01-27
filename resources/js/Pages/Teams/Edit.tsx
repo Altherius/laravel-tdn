@@ -4,15 +4,16 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import InputLabel from "@/Components/InputLabel";
 import TextInput from "@/Components/TextInput";
 import Layout from "@/Layouts/Layout";
-import {PageProps} from "@/types";
+import {User} from "@/types";
 import {Team} from "@/types/team";
+import {FormEvent} from "react";
 
-export default function Create({ auth, team }: {auth: PageProps, team: Team}) {
+export default function Create({ auth, team }: {auth: {user: User}, team: Team}) {
     const { data, setData, put, processing, reset, errors } = useForm({
         name: '',
     })
 
-    const submit = (e) => {
+    const submit = (e: FormEvent) => {
         e.preventDefault();
         put(route('teams.update', team.id));
     };

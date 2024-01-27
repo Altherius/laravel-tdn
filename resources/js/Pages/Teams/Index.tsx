@@ -1,14 +1,15 @@
-import {PageProps} from "@/types";
+import {PageProps, User} from "@/types";
 import {Head} from "@inertiajs/react";
 import {Team} from "@/types/team";
 import Layout from "@/Layouts/Layout";
+import Subtitle from "@/Components/Subtitle";
 
-export default function Index({ auth, teams }: {auth: PageProps, teams: Array<Team>}) {
+export default function Index({ auth, teams }: {auth: {user: User}, teams: Array<Team>}) {
 
     return (
         <Layout
             user={auth.user}
-            header={<h2 className="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight">Classement des nations</h2>}
+            header={<Subtitle className="text-center">Classement des nations</Subtitle>}
         >
             <Head title="Classement"/>
 

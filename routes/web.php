@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FootballMatchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TeamController;
 use Illuminate\Foundation\Application;
@@ -37,5 +38,6 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('teams', TeamController::class);
+Route::resource('matches', FootballMatchController::class);
 
 require __DIR__.'/auth.php';

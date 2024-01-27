@@ -1,16 +1,19 @@
 import {PageProps, User} from "@/types";
 import {Head} from "@inertiajs/react";
-import {Team} from "@/types/team";
 import Layout from "@/Layouts/Layout";
+import Subtitle from "@/Components/Subtitle";
+import {Match} from "@/types/match";
 
-export default function Index({ auth, teams }: {auth: {user: User}, teams: Array<Team>}) {
+export default function Index({ auth, matches }: {auth: {user: User}, matches: Array<Match>}) {
+
+    console.log(matches)
 
     return (
         <Layout
             user={auth.user}
-            header={<h2 className="font-semibold text-center text-xl text-gray-800 dark:text-gray-200 leading-tight">Classement des nations</h2>}
+            header={<Subtitle className="text-center">Derniers matchs</Subtitle>}
         >
-            <Head title="Classement"/>
+            <Head title="Derniers matchs"/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -19,18 +22,17 @@ export default function Index({ auth, teams }: {auth: {user: User}, teams: Array
                             <table className={"w-full table-auto border-separate border-spacing-y-3"}>
                                 <thead className={"text-left"}>
                                 <tr>
-                                    <th>Rang</th>
-                                    <th>Pays</th>
-                                    <th>Elo</th>
+                                    <th>Match</th>
+                                    <th>Résultat</th>
+                                    <th>Description</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {teams.sort((a, b) => a.rating < b.rating ? 1 : -1)
-                                    .map((team, index) =>
-                                        <tr key={team.id}>
-                                            <td>{index + 1}</td>
-                                            <td><a href={route('teams.show', team.id)}>{team.name}</a></td>
-                                            <td>{team.rating}</td>
+                                {matches.map((match) =>
+                                        <tr key={match.id}>
+                                            <td><a href={route('matches.show', match.id)}>{match.hosting_team.name} - {match.receiving_team.name}</a></td>
+                                            <td>{match.hosting_team_score} - {match.receiving_team_score}</td>
+                                            <td>{match.description || <i>Aucune description</i>}</td>
                                         </tr>
                                 )}
                                 </tbody>

@@ -1,6 +1,10 @@
-export interface Team {
+import {Team} from "@/types/team";
+
+export interface Match {
     id: number
-    name: string
-    country_code: string
-    rating: number
+    hosting_team: Team
+    receiving_team: Team
+    hosting_team_score: number
+    receiving_team_score: number
+    description: string
 }
