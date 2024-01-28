@@ -27,7 +27,7 @@ class TeamsTest extends TestCase
     public function test_teams_can_be_created(): void
     {
         $this->post('/teams', [
-            'name' => 'Test team'
+            'name' => 'Test team',
         ]);
 
         $this->assertDatabaseHas('teams', [
@@ -38,7 +38,7 @@ class TeamsTest extends TestCase
     public function test_team_creation_redirects_to_show_page(): void
     {
         $response = $this->post('/teams', [
-            'name' => 'Test team'
+            'name' => 'Test team',
         ]);
 
         $team = Team::where('name', 'Test team')->first();
