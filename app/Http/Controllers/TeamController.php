@@ -32,7 +32,7 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required'
+            'name' => 'required',
         ]);
 
         $team = new Team();
@@ -58,7 +58,7 @@ class TeamController extends Controller
     public function edit(Team $team)
     {
         return Inertia::render('Teams/Edit', [
-            'team' => $team
+            'team' => $team,
         ]);
     }
 

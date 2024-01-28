@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FootballMatch;
 use App\Models\Team;
+use App\Services\Elo\Elo;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -17,7 +18,7 @@ class FootballMatchController extends Controller
         $matches = FootballMatch::with(['hostingTeam', 'receivingTeam'])->get();
 
         return Inertia::render('Matches/Index', [
-            'matches' => $matches
+            'matches' => $matches,
         ]);
     }
 
@@ -27,14 +28,14 @@ class FootballMatchController extends Controller
     public function create()
     {
         return Inertia::render('Matches/Create', [
-            'teams' => Team::all()
+            'teams' => Team::all(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Elo $elo)
     {
         $footballMatch = new FootballMatch();
 
@@ -44,7 +45,18 @@ class FootballMatchController extends Controller
         $footballMatch->receiving_team_score = $request->receiving_team_score;
         $footballMatch->description = $request->description;
 
+        $eloPointsExchanged = $elo->getEloExchange(
+            $footballMatch->hostingTeam->rating,
+            $footballMatch->receivingTeam->rating,
+            $footballMatch->getResult()
+        );
+
+        $footballMatch->hostingTeam->rating += $eloPointsExchanged;
+        $footballMatch->receivingTeam->rating -= $eloPointsExchanged;
+
         $footballMatch->save();
+        $footballMatch->hostingTeam->save();
+        $footballMatch->receivingTeam->save();
 
         return to_route('matches.show', $footballMatch->id);
     }
@@ -66,7 +78,7 @@ class FootballMatchController extends Controller
     {
         return Inertia::render('Matches/Create', [
             'teams' => Team::all(),
-            'match' => $footballMatch
+            'match' => $footballMatch,
         ]);
     }
 
