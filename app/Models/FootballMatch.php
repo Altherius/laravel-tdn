@@ -16,6 +16,11 @@ class FootballMatch extends Model
         return $this->belongsTo(Team::class, 'hosting_team_id');
     }
 
+    public function tournament(): BelongsTo
+    {
+        return $this->belongsTo(Tournament::class, 'tournament_id');
+    }
+
     public function receivingTeam(): BelongsTo
     {
         return $this->belongsTo(Team::class, 'receiving_team_id');

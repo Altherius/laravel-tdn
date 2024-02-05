@@ -23,6 +23,7 @@ export default function Index({ auth, matches }: {auth: {user: User}, matches: A
                                 <thead className={"text-left"}>
                                 <tr>
                                     <th>Match</th>
+                                    <th>Tournoi</th>
                                     <th>Résultat</th>
                                     <th>Description</th>
                                 </tr>
@@ -31,6 +32,7 @@ export default function Index({ auth, matches }: {auth: {user: User}, matches: A
                                 {matches.map((match) =>
                                         <tr key={match.id}>
                                             <td><a href={route('matches.show', match.id)}>{match.hosting_team.name} - {match.receiving_team.name}</a></td>
+                                            <td><a href={route('tournaments.show', match.tournament.id)}>{match.tournament.name}</a></td>
                                             <td>{match.hosting_team_score} - {match.receiving_team_score}</td>
                                             <td>{match.description || <i>Aucune description</i>}</td>
                                         </tr>

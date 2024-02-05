@@ -28,6 +28,9 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                                 <NavLink href={route('matches.index')} active={route().current('matches.index')}>
                                     Matches
                                 </NavLink>
+                                <NavLink href={route('tournaments.index')} active={route().current('tournaments.index')}>
+                                    Tournois
+                                </NavLink>
                             </div>
                         </div>
 
@@ -96,8 +99,14 @@ export default function Authenticated({ user, header, children }: PropsWithChild
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Dashboard
+                        <ResponsiveNavLink href={route('teams.index')} active={route().current('teams.index')}>
+                            Classement
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('matches.index')} active={route().current('matches.index')}>
+                            Matches
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('tournaments.index')} active={route().current('tournaments.index')}>
+                            Tournois
                         </ResponsiveNavLink>
                     </div>
 
@@ -110,9 +119,9 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('profile.edit')}>Profil</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
-                                Log Out
+                                Déconnexion
                             </ResponsiveNavLink>
                         </div>
                     </div>
