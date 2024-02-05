@@ -5,9 +5,6 @@ import Subtitle from "@/Components/Subtitle";
 import {Match} from "@/types/match";
 
 export default function Index({ auth, matches }: {auth: {user: User}, matches: Array<Match>}) {
-
-    console.log(matches)
-
     return (
         <Layout
             user={auth.user}
