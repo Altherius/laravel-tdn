@@ -29,6 +29,9 @@ export default function Guest({header, children }: PropsWithChildren<{header?: R
                                 <NavLink href={route('matches.index')} active={route().current('matches.index')}>
                                     Matches
                                 </NavLink>
+                                <NavLink href={route('tournaments.index')} active={route().current('tournaments.index')}>
+                                    Tournois
+                                </NavLink>
                             </div>
                         </div>
 
@@ -73,6 +76,9 @@ export default function Guest({header, children }: PropsWithChildren<{header?: R
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('matches.index')} active={route().current('matches.index')}>
                             Matches
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('tournaments.index')} active={route().current('tournaments.index')}>
+                            Tournois
                         </ResponsiveNavLink>
                         <ResponsiveNavLink href={route('login')} active={route().current('login')}>
                             Connexion

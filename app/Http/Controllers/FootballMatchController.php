@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\FootballMatch;
 use App\Models\Team;
+use App\Models\Tournament;
 use App\Services\Elo\Elo;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -15,7 +16,7 @@ class FootballMatchController extends Controller
      */
     public function index()
     {
-        $matches = FootballMatch::with(['hostingTeam', 'receivingTeam'])->get();
+        $matches = FootballMatch::with(['hostingTeam', 'receivingTeam', 'tournament'])->get();
 
         return Inertia::render('Matches/Index', [
             'matches' => $matches,
@@ -29,6 +30,7 @@ class FootballMatchController extends Controller
     {
         return Inertia::render('Matches/Create', [
             'teams' => Team::all(),
+            'tournaments' => Tournament::all(),
         ]);
     }
 
@@ -39,6 +41,7 @@ class FootballMatchController extends Controller
     {
         $footballMatch = new FootballMatch();
 
+        $footballMatch->tournament_id = $request->tournament_id;
         $footballMatch->hosting_team_id = $request->hosting_team_id;
         $footballMatch->receiving_team_id = $request->receiving_team_id;
         $footballMatch->hosting_team_score = $request->hosting_team_score;
